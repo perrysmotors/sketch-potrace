@@ -8,10 +8,6 @@ Potrace for Sketch is a bitmap tracing plugin. It converts bitmap images into mo
 * Un-zip
 * Double-click on `potrace.sketchplugin`
 
-or...
-
-[![Install Potrace with Sketchpacks](http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png "Install Potrace with Sketchpacks")](https://sketchpacks.com/perrysmotors/sketch-potrace/install)
-
 ## Features
 - Trace
 - Posterize

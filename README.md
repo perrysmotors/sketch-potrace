@@ -14,9 +14,11 @@ Potrace for Sketch is a bitmap tracing plugin. It converts bitmap images into mo
 
 ## How it works
 
+Potrace for Sketch is based on [Potrace][potrace], a bitmap tracing algorithm developed by Peter Selinger.
+
 - Select one or more bitmap images and run the plugin. 
 - Potrace places a new vector graphic on top of each bitmap, and hides the orginal. 
-- Potrace only processes bitmaps. If you want to process layer with an image fill, use `Layer > Flatten Selection to Bitmap` first.
+- Potrace only processes bitmaps. If you want to process a layer with an image fill, use `Layer > Flatten Selection to Bitmap` first.
 
 ## Example
 

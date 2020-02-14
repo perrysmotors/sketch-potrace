@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "Trace Bitmap",
+      "identifier": "potrace.trace",
+      "script": "./sketch-potrace.js"
+    },
+    {
+      "name": "Posterize Bitmap",
+      "identifier": "potrace.posterize",
+      "script": "./sketch-potrace.js",
+      "handler": "onPosterize"
+    }
+  ],
+  "menu": {
+    "title": "Potrace",
+    "items": [
+      "potrace.trace",
+      "potrace.posterize"
+    ]
+  }
+}

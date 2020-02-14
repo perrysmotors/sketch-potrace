@@ -1,0 +1,5 @@
+{
+    "schema_version": "1.0.0",
+    "manifest_path": "src/manifest.json",
+    "appcast_path": "https://raw.githubusercontent.com/perrysmotors/sketch-potrace/master/.appcast.xml"
+}

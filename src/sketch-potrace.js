@@ -24,7 +24,7 @@ function replaceImageWithSVG(image, svgString) {
 
 function doPotrace(action, verb) {
     const selection = Document.getSelectedDocument().selectedLayers
-    const exportOptions = { formats: "png", output: false }
+
     const selectedImages = selection
         .map(layer => layer)
         .filter(layer => layer.type === "Image")
@@ -32,6 +32,7 @@ function doPotrace(action, verb) {
     if (selectedImages.length === 0) {
         UI.message("⚠️ Select one or more bitmaps")
     } else {
+        const exportOptions = { formats: "png", output: false }
         selectedImages.forEach(image => {
             const buffer = Document.export(image, exportOptions)
 
@@ -41,10 +42,7 @@ function doPotrace(action, verb) {
             })
         })
 
-        if (selectedImages.length === 1) {
-            UI.message(`1 bitmap ${verb} 🙌`)
-        } else {
-            UI.message(`${selectedImages.length} bitmaps ${verb} 🙌`)
-        }
+        const noun = (selectedImages.length === 1) ? "bitmap" : "bitmaps"
+        UI.message(`${selectedImages.length} ${noun} ${verb} 🙌`)
     }
 }

@@ -4,26 +4,25 @@ import Document from "sketch/dom"
 const potrace = require("potrace")
 
 export default function() {
-    doPotrace()
+    doPotrace(potrace.trace, "traced")
 }
 
 export function onPosterize() {
-    doPotrace(true)
+    doPotrace(potrace.posterize, "posterized")
 }
 
 function replaceImageWithSVG(image, svgString) {
+    const { x, y, width, height } = image.frame
     const group = Document.createLayerFromData(svgString, "svg")
     group.name = image.name
     group.parent = image.parent
     group.index = image.index + 1
-    group.frame.x = image.frame.x
-    group.frame.y = image.frame.y
+    group.frame.x = x + (width - group.frame.width) / 2
+    group.frame.y = y + (height - group.frame.height) / 2
     image.hidden = true
 }
 
-function doPotrace(posterize = false) {
-    const action = posterize ? "posterized" : "traced"
-
+function doPotrace(action, verb) {
     const selection = Document.getSelectedDocument().selectedLayers
     const exportOptions = { formats: "png", output: false }
     const selectedImages = selection
@@ -36,23 +35,16 @@ function doPotrace(posterize = false) {
         selectedImages.forEach(image => {
             const buffer = Document.export(image, exportOptions)
 
-            if (posterize) {
-                potrace.posterize(buffer, function(err, svgString) {
-                    if (err) throw err
-                    replaceImageWithSVG(image, svgString)
-                })
-            } else {
-                potrace.trace(buffer, function(err, svgString) {
-                    if (err) throw err
-                    replaceImageWithSVG(image, svgString)
-                })
-            }
+            action(buffer, function(err, svgString) {
+                if (err) throw err
+                replaceImageWithSVG(image, svgString)
+            })
         })
 
         if (selectedImages.length === 1) {
-            UI.message(`1 bitmap ${action} 🙌`)
+            UI.message(`1 bitmap ${verb} 🙌`)
         } else {
-            UI.message(`${selectedImages.length} bitmaps ${action} 🙌`)
+            UI.message(`${selectedImages.length} bitmaps ${verb} 🙌`)
         }
     }
 }
